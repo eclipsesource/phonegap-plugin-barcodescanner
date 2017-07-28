@@ -1,46 +1,20 @@
-# PhoneGap Plugin BarcodeScanner
+# Tabris Plugin BarcodeScanner
 ================================
 
 [![Build Status](https://travis-ci.org/phonegap/phonegap-plugin-barcodescanner.svg)](https://travis-ci.org/phonegap/phonegap-plugin-barcodescanner)
 
-Cross-platform BarcodeScanner for Cordova / PhoneGap.
+Cross-platform BarcodeScanner for Tabris.js
 
-Follows the [Cordova Plugin spec](https://cordova.apache.org/docs/en/latest/plugin_ref/spec.html), so that it works with [Plugman](https://github.com/apache/cordova-plugman).
-
-## Installation
-
-
-This requires phonegap 5.0+ ( current stable v3.0.0 )
-
-    phonegap plugin add phonegap-plugin-barcodescanner
-
-Older versions of phonegap can still install via the __deprecated__ id ( stale v2.0.1 )
-
-    phonegap plugin add com.phonegap.plugins.barcodescanner
-
-It is also possible to install via repo url directly ( unstable )
-
-    phonegap plugin add https://github.com/phonegap/phonegap-plugin-barcodescanner.git
 
 ### Supported Platforms
 
 - Android
 - iOS
-- Windows (Windows/Windows Phone 8.1 and Windows 10)
-- Windows Phone 8
-- BlackBerry 10
-- Browser
 
 Note: the Android source for this project includes an Android Library Project.
 plugman currently doesn't support Library Project refs, so its been
 prebuilt as a jar library. Any updates to the Library Project should be
 committed with an updated jar.
-
-Note: Windows 10 applications can not be build for `AnyCPU` architecture, which is default for Windows platform. If you want to build/run Windows 10 app, you should specify target architecture explicitly, for example (Cordova CLI):
-
-```
-cordova run windows -- --archs=x86
-```
 
 Note: Since iOS 10 it's mandatory to add a `NSCameraUsageDescription` in the info.plist.
 
@@ -52,9 +26,6 @@ To add this entry you can pass the following variable on plugin install.
 ```
 cordova plugin add phonegap-plugin-barcodescanner --variable CAMERA_USAGE_DESCRIPTION="To scan barcodes"
 ```
-
-### PhoneGap Build
-If you're using [PhoneGap Build](https://build.phonegap.com/) please make sure you specify `gradle` as your Android build tool in `config.xml`: `<preference name="android-build-tool" value="gradle" />`.
 
 ## Using the plugin ##
 The plugin creates the object `cordova/plugin/BarcodeScanner` with the method `scan(success, fail)`.
@@ -91,53 +62,6 @@ Not by default, but supported if you pass in the "formats" option:
 * CODE_128
 * CODE_39
 * ITF
-
-### Windows
-
-* UPC_A
-* UPC_E
-* EAN_8
-* EAN_13
-* CODE_39
-* CODE_93
-* CODE_128
-* ITF
-* CODABAR
-* MSI
-* RSS14
-* QR_CODE
-* DATA_MATRIX
-* AZTEC
-* PDF417
-
-### Windows Phone 8
-
-* UPC_A
-* UPC_E
-* EAN_8
-* EAN_13
-* CODE_39
-* CODE_93
-* CODE_128
-* ITF
-* CODABAR
-* MSI
-* RSS14
-* QR_CODE
-* DATA_MATRIX
-* AZTEC
-* PDF417
-
-### BlackBerry 10
-* UPC_A
-* UPC_E
-* EAN_8
-* EAN_13
-* CODE_39
-* CODE_128
-* ITF
-* DATA_MATRIX
-* AZTEC
 
 `success` and `fail` are callback functions. Success is passed an object with data, type and cancelled properties. Data is the text representation of the barcode data, type is the type of barcode detected and cancelled is whether or not the user cancelled the scan.
 
@@ -190,19 +114,6 @@ A full example could be:
         );
 ```
 
-## Windows quirks ##
-
-* Windows implementation currently doesn't support encode functionality.
-
-* On Windows 10 desktop ensure that you have Windows Media Player and Media Feature pack installed.
-
-## Windows Phone 8 quirks ##
-Windows Phone 8 implementation currently doesn't support encode functionality.
-
-## BlackBerry 10 quirks
-BlackBerry 10 implementation currently doesn't support encode functionality.
-Cancelling a scan on BlackBerry 10 is done by touching the screen.
-
 ## Thanks on Github ##
 
 So many -- check out the original [iOS](https://github.com/phonegap/phonegap-plugins/tree/DEPRECATED/iOS/BarcodeScanner),  [Android](https://github.com/phonegap/phonegap-plugins/tree/DEPRECATED/Android/BarcodeScanner) and
@@ -231,3 +142,5 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+Modifications for Tabris.js by EclipseSource Inc.
