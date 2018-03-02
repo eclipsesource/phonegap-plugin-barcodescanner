@@ -27,8 +27,17 @@ To add this entry you can pass the following variable on plugin install.
 cordova plugin add phonegap-plugin-barcodescanner --variable CAMERA_USAGE_DESCRIPTION="To scan barcodes"
 ```
 
+### Building with Tabris CLI
+
+Add the following to your config.xml:
+
+```
+<plugin name="phonegap-plugin-barcodescanner" spec="https://github.com/eclipsesource/phonegap-plugin-barcodescanner.git#v6.0.8">
+  <param name="CAMERA_USAGE_DESCRIPTION" value="To scan barcodes." />
+</plugin>
+```
 ## Using the plugin ##
-The plugin creates the object `cordova/plugin/BarcodeScanner` with the method `scan(success, fail)`.
+The plugin creates the object `cordova.plugins.barcodeScanner` with the method `scan(success, fail)`.
 
 The following barcode types are currently supported:
 ### Android
@@ -48,7 +57,7 @@ The following barcode types are currently supported:
 * RSS_EXPANDED
 
 Not by default, but supported if you pass in the "formats" option:
-* PDF417
+* PDF_417
 * AZTEC
 
 ### iOS
@@ -82,6 +91,7 @@ A full example could be:
           showFlipCameraButton : true, // iOS and Android
           showTorchButton : true, // iOS and Android
           torchOn: true, // Android, launch with the torch switched on (if available)
+          saveHistory: true // Android, save scan history (default false)
           prompt : "Place a barcode inside the scan area", // Android
           resultDisplayDuration: 500, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
           formats : "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
