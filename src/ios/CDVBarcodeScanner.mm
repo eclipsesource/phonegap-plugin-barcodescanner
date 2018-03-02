@@ -7,7 +7,6 @@
  */
 
 #import <AVFoundation/AVFoundation.h>
-#import <AssetsLibrary/AssetsLibrary.h>
 
 //------------------------------------------------------------------------------
 // use the all-in-one version of zxing that we built
@@ -85,7 +84,6 @@
 - (UIImage*)getImageFromSample:(CMSampleBufferRef)sampleBuffer;
 - (zxing::Ref<zxing::LuminanceSource>) getLuminanceSourceFromSample:(CMSampleBufferRef)sampleBuffer imageBytes:(uint8_t**)ptr;
 - (UIImage*) getImageFromLuminanceSource:(zxing::LuminanceSource*)luminanceSource;
-- (void)dumpImage:(UIImage*)image;
 @end
 
 //------------------------------------------------------------------------------
@@ -522,7 +520,7 @@ parentViewController:(UIViewController*)parentViewController
     else {
         return @"unable to add video capture output to session";
     }
-    
+
     [output setMetadataObjectTypes:[self formatObjectTypes]];
 
     // setup capture preview layer
@@ -559,8 +557,6 @@ parentViewController:(UIViewController*)parentViewController
          [flashView removeFromSuperview];
      }
      ];
-
-    //         [self dumpImage: [[self getImageFromSample:sampleBuffer] autorelease]];
 #endif
 
 
@@ -628,9 +624,9 @@ parentViewController:(UIViewController*)parentViewController
     if (self.formats != nil) {
         supportedFormats = [self.formats componentsSeparatedByString:@","];
     }
-    
+
     NSMutableArray * formatObjectTypes = [NSMutableArray array];
-    
+
     if (self.formats == nil || [supportedFormats containsObject:@"QR_CODE"]) [formatObjectTypes addObject:AVMetadataObjectTypeQRCode];
     if (self.formats == nil || [supportedFormats containsObject:@"AZTEC"]) [formatObjectTypes addObject:AVMetadataObjectTypeAztecCode];
     if (self.formats == nil || [supportedFormats containsObject:@"DATA_MATRIX"]) [formatObjectTypes addObject:AVMetadataObjectTypeDataMatrixCode];
@@ -642,7 +638,7 @@ parentViewController:(UIViewController*)parentViewController
     if (self.formats == nil || [supportedFormats containsObject:@"CODE_39"]) [formatObjectTypes addObject:AVMetadataObjectTypeCode39Code];
     if (self.formats == nil || [supportedFormats containsObject:@"ITF"]) [formatObjectTypes addObject:AVMetadataObjectTypeITF14Code];
     if (self.formats == nil || [supportedFormats containsObject:@"PDF_417"]) [formatObjectTypes addObject:AVMetadataObjectTypePDF417Code];
-    
+
     return formatObjectTypes;
 }
 
@@ -766,22 +762,6 @@ parentViewController:(UIViewController*)parentViewController
     free(baseAddress);
 
     return image;
-}
-
-//--------------------------------------------------------------------------
-// for debugging
-//--------------------------------------------------------------------------
-- (void)dumpImage:(UIImage*)image {
-    NSLog(@"writing image to library: %dx%d", (int)image.size.width, (int)image.size.height);
-    ALAssetsLibrary* assetsLibrary = [[[ALAssetsLibrary alloc] init] autorelease];
-    [assetsLibrary
-     writeImageToSavedPhotosAlbum:image.CGImage
-     orientation:ALAssetOrientationUp
-     completionBlock:^(NSURL* assetURL, NSError* error){
-         if (error) NSLog(@"   error writing image to library");
-         else       NSLog(@"   wrote image to library %@", assetURL);
-     }
-     ];
 }
 
 @end
